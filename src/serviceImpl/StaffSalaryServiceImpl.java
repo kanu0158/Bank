@@ -5,23 +5,19 @@ import service.*;
 
 public class StaffSalaryServiceImpl extends SalaryServiceImpl implements StaffSalaryService {
 	@Override
-	public StaffSalary createStaffSalary(String name, String dept, String sal) {
-		StaffSalary st = new StaffSalary();
-		st.setName(name);
-		st.setDept(dept);
-		st.setSal(Integer.parseInt(sal));
-		st.setBonus(createBonus(Integer.parseInt(sal)));
-		return st;
+	public void createStaffSalary(StaffSalaryBean staffSalaryBean) {
+		staffSalaryBean.setBonus(createBonus(staffSalaryBean.getSal()));
+		addList(staffSalaryBean);
 	}
 
 	@Override
-	public void addList(StaffSalary staffSalary) {
+	public void addList(StaffSalaryBean staffSalary) {
 		list[super.count++] = staffSalary;
 	}
 
 	@Override
-	public int createBonus(int sal) {
-		return sal * 10 / 100;
+	public String createBonus(String sal) {
+		return String.valueOf(Integer.parseInt(sal) * 10 / 100);
 	}
 
 }

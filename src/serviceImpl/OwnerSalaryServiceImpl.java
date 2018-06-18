@@ -1,29 +1,25 @@
 package serviceImpl;
 
-import domain.OwnerSalary;
+import domain.OwnerSalaryBean;
 import service.OwnerSalaryService;
 
 public class OwnerSalaryServiceImpl extends StaffSalaryServiceImpl implements OwnerSalaryService {
 
 	@Override
-	public OwnerSalary createOwnerSalary(String name, String dept, String sal) {
-		OwnerSalary os = new OwnerSalary();
-		os.setName(name);
-		os.setDept(dept);
-		os.setSal(Integer.parseInt(sal));
-		os.setBonus(createBonus(Integer.parseInt(sal)));
-		os.setShare(share(os.getSal(), os.getBonus()));
-		return os;
+	public void createOwnerSalary(OwnerSalaryBean ownerSalaryBean) {
+		ownerSalaryBean.setBonus(createBonus(ownerSalaryBean.getSal()));
+		ownerSalaryBean.setShare(share(ownerSalaryBean.getSal(), ownerSalaryBean.getBonus()));
+		addList(ownerSalaryBean);
 	}
 
 	@Override
-	public void addList(OwnerSalary ownerSalary) {
+	public void addList(OwnerSalaryBean ownerSalary) {
 		list[super.count++] = ownerSalary;
 	}
 
 	@Override
-	public int share(int sal, int bonus) {
-		return (sal + bonus) * 10;
+	public String share(String sal, String bonus) {
+		return String.valueOf((Integer.parseInt(sal) + Integer.parseInt(bonus)) * 10);
 	}
 
 }

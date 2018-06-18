@@ -1,15 +1,14 @@
 package domain;
 
-public class Salary {
+public class SalaryBean {
 	public static final String DEPT = "인턴쉽";
-	protected String dept, name;
-	protected int sal;
+	protected String dept, name,sal;
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public void setSal(int sal) {
+	public void setSal(String sal) {
 		this.sal = sal;
 	}
 
@@ -25,11 +24,11 @@ public class Salary {
 		return dept;
 	}
 
-	public int getSal() {
+	public String getSal() {
 		return sal;
 	}
 
 	public String toString() {
-		return String.format("%s | %d | \n", getName().substring(0, 1) + getDept().substring(0, 2), getSal());
+		return String.format("%s | %s | \n", getName().substring(0, 1) + getDept().substring(0, 2), getSal());
 	}
 }

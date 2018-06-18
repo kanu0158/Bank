@@ -1,6 +1,6 @@
 package domain;
 
-public class Account {
+public class AccountBean {
 	public final static String BANK_NAME = "비트뱅크";
 	public final static String ACCOUNT_TYPE = "기본통장";
 	public final static String WITHDRAW_SUCCESS = "출금성공";
@@ -63,7 +63,7 @@ public class Account {
 	}
 
 	public String toString() {
-		return String.format("%s\n%s\n계좌번호: %s\n이름: %s\n생성일: %s\n잔액: %d\n", BANK_NAME, getAccountType(), getAccountNo(),
-				getName(), getCreateDate(), getMoney());	
+		return String.format("%s\n%s\n계좌번호: %s\n이름: %s\n아이디: %s\n비밀번호: ****\n생성일: %s\n잔액: %d\n", BANK_NAME, getAccountType(), getAccountNo(),
+				getName(),getUid(), getCreateDate(), getMoney());	
 	}
 }

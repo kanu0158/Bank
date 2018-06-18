@@ -3,8 +3,8 @@ package service;
 import domain.*;
 
 public interface SalaryService {
-	public Salary createSalary(String name,String dept,String sal);
-	public void addList(Salary salary);
-	public Salary[] list();
+	public void createSalary(SalaryBean salaryBean);
+	public void addList(SalaryBean salary);
+	public SalaryBean[] list();
 	public String showResult();
 }

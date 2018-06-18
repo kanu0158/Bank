@@ -1,33 +1,29 @@
 package serviceImpl;
 
-import domain.Salary;
+import domain.SalaryBean;
 import service.*;
 
 public class SalaryServiceImpl implements SalaryService {
-	protected Salary[] list;
+	protected SalaryBean[] list;
 	protected int count;
 
 	public SalaryServiceImpl() {
-		list = new Salary[100];
+		list = new SalaryBean[100];
 		count = 0;
 	}
 
 	@Override
-	public Salary createSalary(String name, String dept, String sal) {
-		Salary s = new Salary();
-		s.setName(name);
-		s.setDept(dept);
-		s.setSal(Integer.parseInt(sal));
-		return s;
+	public void createSalary(SalaryBean salaryBean) {
+		addList(salaryBean);
 	}
 
 	@Override
-	public void addList(Salary salary) {
+	public void addList(SalaryBean salary) {
 		list[count++] = salary;
 	}
 
 	@Override
-	public Salary[] list() {
+	public SalaryBean[] list() {
 		return list;
 	}
 

@@ -3,9 +3,9 @@ package service;
 import domain.*;
 
 public interface StaffSalaryService extends SalaryService {
-	public StaffSalary createStaffSalary(String name, String dept, String sal);
+	public void createStaffSalary(StaffSalaryBean staffSalaryBean);
 
-	public void addList(StaffSalary staffSalary);
+	public void addList(StaffSalaryBean staffSalary);
 
-	public int createBonus(int sal);
+	public String createBonus(String sal);
 }

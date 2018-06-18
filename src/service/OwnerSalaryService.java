@@ -3,7 +3,7 @@ package service;
 import domain.*;
 
 public interface OwnerSalaryService extends StaffSalaryService{
-	public OwnerSalary createOwnerSalary(String name,String dept,String sal);
-	public void addList(OwnerSalary ownerSalary);
-	public int share(int sal,int bonus);
+	public void createOwnerSalary(OwnerSalaryBean ownerSalaryBean);
+	public void addList(OwnerSalaryBean ownerSalary);
+	public String share(String sal,String bonus);
 }

@@ -6,33 +6,28 @@ import domain.*;
 import service.*;
 
 public class AccountServiceImpl implements AccountService{
-	protected Account[] list;
+	protected AccountBean[] list;
 	protected int count;
 	
 	public AccountServiceImpl(){
-		list = new Account[100];
+		list = new AccountBean[100];
 		count = 0;
 	}
 	@Override
-	public Account createAccount(String name, String uid, String pass) {
-		Account ac = new Account();
-		ac.setName(name);
-		ac.setUid(uid);
-		ac.setPass(pass);
-		ac.setAccountType("기본통장");
-		ac.setAccountNo(createAccountNum(""));
-		ac.setCreateDate(createDate());
-		return ac;
+	public void createAccountBean(AccountBean accountBean) {
+		accountBean.setAccountType("기본통장");
+		accountBean.setAccountNo(createAccountNum(""));
+		accountBean.setCreateDate(createDate());
+		addList(accountBean);
 	}
 	
 	@Override
-	public void addList(Account account) {
-		list[count++] = account;
-		System.out.println(count);
+	public void addList(AccountBean accountBean) {
+		list[count++] = accountBean;
 	}
 
 	@Override
-	public Account[] list() {
+	public AccountBean[] list() {
 		return list;
 	}
 
@@ -70,14 +65,41 @@ public class AccountServiceImpl implements AccountService{
 	public String createDate() {
 		return new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분 ss초").format(new Date());
 	}
-
 	@Override
-	public String showResult() {
-		String result = "";
+	public AccountBean findById(AccountBean accountBean) {
+		//배열 list를 looping 하면서 id가 일치하고 비번이 일치한 값을 찾아서 그 객체를 리턴한다.
+		//일단 일치하는 값이 없는 상황은 나중에 처리
+		AccountBean ac = new AccountBean();
 		for(int i=0;i<count;i++) {
-			result += list()[i].toString();
+			if((accountBean.getUid().equals(list[i].getUid()) && (accountBean.getPass().equals(list[i].getPass())))) {
+				 ac = list[i];
+				 break;
+			}
 		}
-		return result;
+		return ac;
 	}
-
+	@Override
+	public AccountBean[] findByName(String name) {
+		int nameCount = countSameWord(name);
+		AccountBean[] arr = new AccountBean[nameCount];
+		for(int i=0, nameIndex=0;i<count;i++) {
+			if(name.equals(list[i].getName())) {
+				arr[nameIndex++] = list[i];
+				if(nameIndex == nameCount) {
+					break;
+				}
+			}
+		}
+		return arr;
+	}
+	
+	public int countSameWord(String name) {
+		int num = 0;
+		for(int i=0;i<count;i++) {
+			if(name.equals(list[i].getName())) {
+				num++;
+			}
+		}
+		return num;
+	}
 }
