@@ -20,7 +20,7 @@ public class MinusAccountServiceImpl extends AccountServiceImpl implements Minus
 	}
 
 	@Override
-	public void addList(MinusAccountBean minusAccountBean) {
+	public void addList(AccountBean minusAccountBean) {
 		list[super.count++] = minusAccountBean;
 		minusCount++;
 	}
