@@ -94,8 +94,6 @@ public class MemberServiceImpl implements MemberService{
 		String confirmPass = mb.getPass().split("/")[1];
 		mb.setPass(pass);
 		mb = findById(mb);
-		System.out.println("pass:" + pass);
-		System.out.println("confirmPass:"+confirmPass);
 		if(mb.getUid() == null) {
 			msg = "미가입회원";
 		}else {
