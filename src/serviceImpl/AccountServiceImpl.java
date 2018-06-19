@@ -10,7 +10,7 @@ public class AccountServiceImpl implements AccountService{
 	protected int count;
 	
 	public AccountServiceImpl(){
-		list = new AccountBean[100];
+		list = new AccountBean[5];
 		count = 0;
 	}
 	@Override
@@ -28,6 +28,12 @@ public class AccountServiceImpl implements AccountService{
 
 	@Override
 	public AccountBean[] list() {
+		System.out.println(count);
+		String res = "";
+		for(int i=0;i<list.length;i++) {
+			res += list[i] + "\n";
+		}
+		System.out.println(res);
 		return list;
 	}
 
@@ -101,5 +107,69 @@ public class AccountServiceImpl implements AccountService{
 			}
 		}
 		return num;
+	}
+	@Override
+	public String changePass(AccountBean acb) {
+		String msg = "";
+		//성공 : 변경완료
+		//실패 : 변경실패,똑같은 비번치면 실패
+		String pass = acb.getPass().split("/")[0];
+		String newPass = acb.getPass().split("/")[1];
+		acb.setPass(pass);
+		acb = findById(acb);
+		if(acb.getName() == null) {
+			msg = "없는계좌";
+		}else if(pass.equals(newPass)){
+			msg = "변경실패";
+		}else{
+			acb.setPass(newPass);
+			msg = "변경완료";
+		}
+		return msg;
+	}
+	@Override
+	public String dropAccount(AccountBean acb) {
+		String msg = "";
+		String pass = acb.getPass().split("/")[0];
+		String confirmPass = acb.getPass().split("/")[1];
+		int index = -1;
+		if(pass.equals(confirmPass)) {
+			acb.setPass(pass);
+			acb = findById(acb);
+			if(acb.getUid() == null) {
+				msg = "없는계좌";
+			}else {
+				for(int i=0;i<count;i++) {
+					if((acb.getUid().equals(list[i].getUid()) && (acb.getPass().equals(list[i].getPass())))) { 
+						list[i] = list[--count];
+						list[count] = null;
+						msg = "계좌삭제완료";
+						break;
+					}
+				}
+				
+				/*for(int i=0;i<count;i++) {
+					if(index != -1) {
+						if(i == count-1) {
+							list[i]=null;
+							break;
+						}else {
+							list[i] = list[i+1];
+							continue;
+						}
+					}else {
+						if((acb.getUid().equals(list[i].getUid()) && (acb.getPass().equals(list[i].getPass())))) { 
+							index = i;
+							i--;
+						}
+					}
+				}
+				msg = "계좌삭제완료";
+				count--;*/
+			}
+		}else {
+			msg = "비밀번호가 다릅니다.";
+		}
+		return msg;
 	}
 }

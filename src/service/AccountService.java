@@ -14,4 +14,6 @@ public interface AccountService {
 	public AccountBean findById(AccountBean accountBean);
 	public AccountBean[] findByName(String name);
 	public int countSameWord(String word);
+	public String changePass(AccountBean acb);
+	public String dropAccount(AccountBean acb);
 }

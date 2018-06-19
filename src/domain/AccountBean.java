@@ -35,7 +35,6 @@ public class AccountBean {
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
-
 	public int getMoney() {
 		return money;
 	}
