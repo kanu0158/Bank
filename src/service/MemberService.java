@@ -3,7 +3,6 @@ package service;
 import domain.MemberBean;
 
 public interface MemberService {
-
 	public void createMemberBean(MemberBean mb);
 	public void createUserBean(MemberBean mb);
 	public void createStaffBean(MemberBean mb);

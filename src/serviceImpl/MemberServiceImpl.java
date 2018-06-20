@@ -37,6 +37,7 @@ public class MemberServiceImpl implements MemberService{
 		for(int i=0;i<count;i++) {
 			if(mb.getUid().equals(list[i].getUid()) && mb.getPass().equals(list[i].getPass())) {
 				memberBean = list[i];
+				break;
 			}
 		}
 		return memberBean;
@@ -49,6 +50,7 @@ public class MemberServiceImpl implements MemberService{
 		for(int i=0;i<count;i++) {
 			if(name.equals(list[i].getName())) {
 				arr[index++] = list[i];
+				if(index+1==temp)break;
 			}
 		}
 		return arr;
@@ -105,6 +107,7 @@ public class MemberServiceImpl implements MemberService{
 						list[i] = list[--count];
 						list[count]=null;
 						msg = "회원탈퇴완료";
+						break;
 					}
 				}
 			}
